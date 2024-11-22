@@ -1,0 +1,10 @@
+1. Prisma settings 
+    - Had to downgrade node to 22 stable version because primsa was not compatible with latest node version.
+2. Env settings
+3. Stripe integration
+    - webhook
+    - stripe listen --forward-to localhost:3000/webhooks/stripe
+4. Resend
+    - npm i resend react-email
+    - sender email
+    - "email": "cp .env ./node_modules/react-email && email dev --dir src/email --port 3001"
