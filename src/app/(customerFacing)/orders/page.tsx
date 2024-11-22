@@ -1,6 +1,5 @@
 "use client"
 
-import { Metadata } from 'next';
 import { emailOrderHistory } from "@/actions/orders"
 import { Button } from "@/components/ui/button"
 import {
@@ -15,12 +14,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useFormState, useFormStatus } from "react-dom"
 
-export const metadata: Metadata = {
-  title: 'Orders',
-};
-
 
 export default function MyOrdersPage() {
+  document.title = "Orders"
+  
   const [data, action] = useFormState(emailOrderHistory, {})
   return (
     <form action={action} className="max-2-xl mx-auto">
