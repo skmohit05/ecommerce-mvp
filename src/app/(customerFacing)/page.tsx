@@ -3,7 +3,7 @@ import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard"
 import { Button } from "@/components/ui/button"
 import db from "@/db/db"
 import { cache } from "@/lib/cache"
-import { Product } from "@prisma/client"
+import { ProductEcommerceMvp } from "@prisma/client"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Suspense } from "react"
@@ -46,7 +46,7 @@ export default function HomePage() {
 
 type ProductGridSectionProps = {
   title: string
-  productsFetcher: () => Promise<Product[]>
+  productsFetcher: () => Promise<ProductEcommerceMvp[]>
 }
 
 function ProductGridSection({
@@ -84,7 +84,7 @@ function ProductGridSection({
 async function ProductSuspense({
   productsFetcher,
 }: {
-  productsFetcher: () => Promise<Product[]>
+  productsFetcher: () => Promise<ProductEcommerceMvp[]>
 }) {
   return (await productsFetcher()).map(product => (
     <ProductCard key={product.id} {...product} />
