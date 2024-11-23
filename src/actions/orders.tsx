@@ -18,7 +18,7 @@ export async function emailOrderHistory(
     return { error: "Invalid email address" }
   }
 
-  const user = await db.user.findUnique({
+  const user = await db.userEcommerceMvp.findUnique({
     where: { email: result.data },
     select: {
       email: true,
@@ -51,7 +51,7 @@ export async function emailOrderHistory(
     return {
       ...order,
       downloadVerificationId: (
-        await db.downloadVerification.create({
+        await db.downloadVerificationEcommerceMvp.create({
           data: {
             expiresAt: new Date(Date.now() + 24 * 1000 * 60 * 60),
             productId: order.product.id,

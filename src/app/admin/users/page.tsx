@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 
 function getUsers() {
-  return db.user.findMany({
+  return db.userEcommerceMvp.findMany({
     select: {
       id: true,
       email: true,

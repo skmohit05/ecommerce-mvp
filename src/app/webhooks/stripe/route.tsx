@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const email = charge.billing_details.email
     const pricePaidInCents = charge.amount
 
-    const product = await db.product.findUnique({ where: { id: productId } })
+    const product = await db.productEcommerceMvp.findUnique({ where: { id: productId } })
     if (product == null || email == null) {
       return new NextResponse("Bad Request", { status: 400 })
     }
@@ -31,14 +31,14 @@ export async function POST(req: NextRequest) {
     }
     const {
       orders: [order],
-    } = await db.user.upsert({
+    } = await db.userEcommerceMvp.upsert({
       where: { email },
       create: userFields,
       update: userFields,
       select: { orders: { orderBy: { createdAt: "desc" }, take: 1 } },
     })
 
-    const downloadVerification = await db.downloadVerification.create({
+    const downloadVerification = await db.downloadVerificationEcommerceMvp.create({
       data: {
         productId,
         expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24),

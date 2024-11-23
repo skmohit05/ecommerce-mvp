@@ -18,7 +18,7 @@ export default async function SuccessPage({
   )
   if (paymentIntent.metadata.productId == null) return notFound()
 
-  const product = await db.product.findUnique({
+  const product = await db.productEcommerceMvp.findUnique({
     where: { id: paymentIntent.metadata.productId },
   })
   if (product == null) return notFound()
@@ -68,7 +68,7 @@ export default async function SuccessPage({
 
 async function createDownloadVerification(productId: string) {
   return (
-    await db.downloadVerification.create({
+    await db.downloadVerificationEcommerceMvp.create({
       data: {
         productId,
         expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24),

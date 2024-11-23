@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 function getOrders() {
-  return db.order.findMany({
+  return db.orderEcommerceMvp.findMany({
     select: {
       id: true,
       pricePaidInCents: true,

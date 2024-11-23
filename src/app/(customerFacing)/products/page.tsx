@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const getProducts = cache(() => {
-  return db.product.findMany({
+  return db.productEcommerceMvp.findMany({
     where: { isAvailableForPurchase: true },
     orderBy: { name: "asc" },
   })

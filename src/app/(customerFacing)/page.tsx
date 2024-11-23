@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const getMostPopularProducts = cache(
   () => {
-    return db.product.findMany({
+    return db.productEcommerceMvp.findMany({
       where: { isAvailableForPurchase: true },
       orderBy: { orders: { _count: "desc" } },
       take: 6,
@@ -25,7 +25,7 @@ const getMostPopularProducts = cache(
 )
 
 const getNewestProducts = cache(() => {
-  return db.product.findMany({
+  return db.productEcommerceMvp.findMany({
     where: { isAvailableForPurchase: true },
     orderBy: { createdAt: "desc" },
     take: 6,

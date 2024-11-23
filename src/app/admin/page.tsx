@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 async function getSalesData() {
-  const data = await db.order.aggregate({
+  const data = await db.orderEcommerceMvp.aggregate({
     _sum: { pricePaidInCents: true },
     _count: true,
   })
@@ -27,8 +27,8 @@ async function getSalesData() {
 
 async function getUserData() {
   const [userCount, orderData] = await Promise.all([
-    db.user.count(),
-    db.order.aggregate({
+    db.userEcommerceMvp.count(),
+    db.orderEcommerceMvp.aggregate({
       _sum: { pricePaidInCents: true },
     }),
   ])
@@ -44,8 +44,8 @@ async function getUserData() {
 
 async function getProductData() {
   const [activeCount, inactiveCount] = await Promise.all([
-    db.product.count({ where: { isAvailableForPurchase: true } }),
-    db.product.count({ where: { isAvailableForPurchase: false } }),
+    db.productEcommerceMvp.count({ where: { isAvailableForPurchase: true } }),
+    db.productEcommerceMvp.count({ where: { isAvailableForPurchase: false } }),
   ])
 
   return { activeCount, inactiveCount }

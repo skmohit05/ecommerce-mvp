@@ -1,16 +1,19 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Product {
+model ProductEcommerceMvp {
   id                     String                 @id @default(uuid())
   name                   String
   priceInCents           Int
@@ -20,19 +23,19 @@ model Product {
   isAvailableForPurchase Boolean                @default(true)
   createdAt              DateTime               @default(now())
   updatedAt              DateTime               @updatedAt
-  orders                 Order[]
-  downloadVerifications  DownloadVerification[]
+  orders                 OrderEcommerceMvp[]
+  downloadVerifications  DownloadVerificationEcommerceMvp[]
 }
 
-model User {
+model UserEcommerceMvp {
   id        String   @id @default(uuid())
   email     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  orders    Order[]
+  orders    OrderEcommerceMvp[]
 }
 
-model Order {
+model OrderEcommerceMvp {
   id               String   @id @default(uuid())
   pricePaidInCents Int
   createdAt        DateTime @default(now())
@@ -40,14 +43,14 @@ model Order {
 
   userId    String
   productId String
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+  user      UserEcommerceMvp    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   ProductEcommerceMvp @relation(fields: [productId], references: [id], onDelete: Restrict)
 }
 
-model DownloadVerification {
+model DownloadVerificationEcommerceMvp {
   id        String   @id @default(uuid())
   expiresAt DateTime
   createdAt DateTime @default(now())
   productId String
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product   ProductEcommerceMvp  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }

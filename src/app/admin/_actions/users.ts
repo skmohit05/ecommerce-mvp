@@ -4,7 +4,7 @@ import db from "@/db/db"
 import { notFound } from "next/navigation"
 
 export async function deleteUser(id: string) {
-  const user = await db.user.delete({
+  const user = await db.userEcommerceMvp.delete({
     where: { id },
   })
 
